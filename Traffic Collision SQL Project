@@ -3,7 +3,6 @@ FROM traffic_collision_data_from_2010_to_present;
 
 /* Business Objective is to clean it, which are most likely has crashes, the victim sex, and the age range */
 
-
 SELECT IFNULL(`Victim Age`, 0)
 FROM traffic_collision_data_from_2010_to_present tcdftp;
 
