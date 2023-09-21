@@ -1,0 +1,44 @@
+SELECT *
+FROM traffic_collision_data_from_2010_to_present;
+
+/* Business Objective is to clean it, which are most likely has crashes, the victim sex, and the age range */
+
+
+SELECT IFNULL(`Victim Age`, 0)
+FROM traffic_collision_data_from_2010_to_present tcdftp;
+
+Select REPLACE (`Zip Codes` ,',',' ') 
+FROM traffic_collision_data_from_2010_to_present tcdftp ;
+
+SELECT DATE_FORMAT(`Date Reported`, '%m/%d/%Y')
+FROM traffic_collision_data_from_2010_to_present tcdftp ;
+
+SELECT DATE_FORMAT(`Date Occurred`, '%m/%d/%Y')
+FROM traffic_collision_data_from_2010_to_present tcdftp ;
+
+/* Data has been cleaned. */
+
+SELECT AVG(`Victim Age`) 
+FROM traffic_collision_data_from_2010_to_present tcdftp ;
+
+/* The average age of vitcims is 40 years old. */
+
+SELECT `Victim Sex`,COUNT(`Victim Sex`)
+FROM traffic_collision_data_from_2010_to_present tcdftp 
+GROUP BY `Victim Sex`
+ORDER BY COUNT(`Victim Sex`)DESC ;
+
+/* Males are the highest victims in traffic collisions. */ 
+
+SELECT `Area Name` ,COUNT(`Area Name`)
+FROM traffic_collision_data_from_2010_to_present tcdftp 
+GROUP BY `Area Name` 
+ORDER BY COUNT(`Area Name`)DESC ;
+
+/* The most common area for traffic collisions is 77th street but I want to know the average zip code that is associated with 77th street */ */
+
+SELECT `Area Name` , COUNT(`Area Name`) , AVG(`Zip Codes`) 
+FROM traffic_collision_data_from_2010_to_present tcdftp 
+WHERE  `Area Name` = '77th Street';
+
+/* The average zipcode is 23552 that is associated with 77th street*/
